@@ -46,6 +46,12 @@ export function renderMarkdown(report: DeFiReport): string {
       lines.push("");
     }
 
+    if (section.sourceNotes && section.sourceNotes.length > 0) {
+      lines.push("**Sources**");
+      for (const note of section.sourceNotes) lines.push(`- ${note}`);
+      lines.push("");
+    }
+
     lines.push("---");
     lines.push("");
   }
@@ -57,14 +63,12 @@ export function renderJson(report: DeFiReport): string {
   return JSON.stringify(report, null, 2);
 }
 
-export function finalizeReport(
-  report: Omit<DeFiReport, "wordCount">
-): DeFiReport {
+export function finalizeReport(report: Omit<DeFiReport, "wordCount">): DeFiReport {
   const allText = [
     report.title,
     report.subtitle,
     report.tldr,
-    ...report.sections.map((s: ReportSection) => s.title + " " + s.content),
+    ...report.sections.map((section: ReportSection) => section.title + " " + section.content),
   ].join(" ");
 
   return {

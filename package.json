@@ -2,6 +2,15 @@
   "name": "quill",
   "version": "1.0.0",
   "description": "AI-powered DeFi report writer. Converts raw protocol data into human-readable weekly digests.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuillReports/Quill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/QuillReports/Quill/issues"
+  },
+  "homepage": "https://github.com/QuillReports/Quill#readme",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {

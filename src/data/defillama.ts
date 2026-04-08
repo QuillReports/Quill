@@ -23,9 +23,7 @@ const TRACKED_PROTOCOLS = [
   "Lifinity",
 ];
 
-export async function fetchProtocolSnapshots(
-  apiUrl: string
-): Promise<ProtocolSnapshot[]> {
+export async function fetchProtocolSnapshots(apiUrl: string): Promise<ProtocolSnapshot[]> {
   try {
     const res = await fetch(`${apiUrl}/protocols`);
     if (!res.ok) {
@@ -33,17 +31,18 @@ export async function fetchProtocolSnapshots(
       return [];
     }
 
-    const all = (await res.json()) as DefiLlamaProtocol[];
+    const all = await res.json() as DefiLlamaProtocol[];
 
     return all
-      .filter((p) => TRACKED_PROTOCOLS.includes(p.name))
-      .map((p): ProtocolSnapshot => ({
-        name: p.name,
-        tvlUsd: p.tvl,
-        tvl7dChangePct: p.change_7d ?? 0,
-        volumeUsd24h: p.volume24h ?? 0,
-        chain: p.chains[0] ?? "Unknown",
-        category: p.category,
+      .filter((protocol) => TRACKED_PROTOCOLS.includes(protocol.name))
+      .map((protocol): ProtocolSnapshot => ({
+        name: protocol.name,
+        tvlUsd: protocol.tvl,
+        tvl7dChangePct: protocol.change_7d ?? 0,
+        volumeUsd24h: protocol.volume24h ?? 0,
+        chain: protocol.chains[0] ?? "Unknown",
+        category: protocol.category,
+        metricSource: "defillama",
       }));
   } catch (err) {
     logger.error("Failed to fetch DefiLlama protocols:", err);
@@ -59,10 +58,10 @@ export async function fetchTvlHistory(
   try {
     const res = await fetch(`${apiUrl}/protocol/${slug}`);
     if (!res.ok) return [];
-    const data = (await res.json()) as {
+    const data = await res.json() as {
       tvl?: Array<{ date: number; totalLiquidityUSD: number }>;
     };
-    return (data.tvl ?? []).map((p) => ({ date: p.date, tvl: p.totalLiquidityUSD }));
+    return (data.tvl ?? []).map((point) => ({ date: point.date, tvl: point.totalLiquidityUSD }));
   } catch {
     return [];
   }

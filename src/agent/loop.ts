@@ -1,11 +1,11 @@
 import Anthropic from "@anthropic-ai/sdk";
-import type { DeFiReport, ReportType } from "../lib/types.js";
 import type { Config } from "../lib/config.js";
+import type { DeFiReport, ReportType } from "../lib/types.js";
 import { buildSystemPrompt, buildUserPrompt } from "./prompts.js";
 import { fetchProtocolSnapshots } from "../data/defillama.js";
 import { fetchTokenPrices } from "../data/coingecko.js";
-import { buildTvlSection, buildPriceSection, buildVolumeSection } from "../writer/sections.js";
-import { renderMarkdown, renderJson, finalizeReport } from "../writer/formatter.js";
+import { buildNarrativeSection, buildPriceSection, buildTvlSection, buildVolumeSection } from "../writer/sections.js";
+import { finalizeReport } from "../writer/formatter.js";
 import { printReport } from "../output/printer.js";
 import { logger } from "../lib/logger.js";
 
@@ -29,12 +29,8 @@ const TOOLS: Anthropic.Tool[] = [
         section_type: {
           type: "string",
           enum: ["tvl_overview", "price_performance", "dex_volume", "narrative"],
-          description: "Which section to write",
         },
-        notes: {
-          type: "string",
-          description: "Optional guidance or emphasis for this section",
-        },
+        notes: { type: "string" },
       },
       required: ["section_type"],
     },
@@ -47,7 +43,7 @@ const TOOLS: Anthropic.Tool[] = [
       properties: {
         title: { type: "string" },
         subtitle: { type: "string" },
-        tldr: { type: "string", description: "2-3 sentence summary of the whole report" },
+        tldr: { type: "string" },
         format: { type: "string", enum: ["markdown", "json"] },
       },
       required: ["title", "subtitle", "tldr"],
@@ -55,13 +51,10 @@ const TOOLS: Anthropic.Tool[] = [
   },
 ];
 
-export async function runAgentLoop(
-  config: Config,
-  reportType: ReportType = "weekly_digest"
-): Promise<void> {
+export async function runAgentLoop(config: Config, reportType: ReportType = "weekly_digest"): Promise<void> {
   const client = new Anthropic({ apiKey: config.ANTHROPIC_API_KEY });
 
-  logger.info(`Starting Quill — generating ${reportType}...`);
+  logger.info(`Starting Quill - generating ${reportType}...`);
 
   const [protocols, prices] = await Promise.all([
     fetchProtocolSnapshots(config.DEFILLAMA_API_URL),
@@ -71,17 +64,11 @@ export async function runAgentLoop(
   logger.info(`Loaded ${protocols.length} protocols, ${prices.length} token prices`);
 
   const sections: DeFiReport["sections"] = [];
-
   const messages: Anthropic.MessageParam[] = [
     { role: "user", content: buildUserPrompt(reportType, protocols, prices) },
   ];
 
-  let iterations = 0;
-  const MAX_ITER = 12;
-
-  while (iterations < MAX_ITER) {
-    iterations++;
-
+  for (let iterations = 0; iterations < 12; iterations++) {
     const response = await client.messages.create({
       model: "claude-opus-4-6",
       max_tokens: 6000,
@@ -93,8 +80,8 @@ export async function runAgentLoop(
     messages.push({ role: "assistant", content: response.content });
 
     if (response.stop_reason === "end_turn") {
-      const textBlocks = response.content.filter((b): b is Anthropic.TextBlock => b.type === "text");
-      const text = textBlocks.map((b) => b.text).join("\n");
+      const textBlocks = response.content.filter((block): block is Anthropic.TextBlock => block.type === "text");
+      const text = textBlocks.map((block) => block.text).join("\n");
       if (text) console.log("\n" + text);
       break;
     }
@@ -119,22 +106,17 @@ export async function runAgentLoop(
         prices.push(...data);
         result = JSON.stringify(data);
       } else if (block.name === "write_section") {
-        const input = block.input as { section_type: string; notes?: string };
-        let section;
-        if (input.section_type === "tvl_overview") section = buildTvlSection(protocols);
-        else if (input.section_type === "price_performance") section = buildPriceSection(prices);
-        else if (input.section_type === "dex_volume") section = buildVolumeSection(protocols);
-        else {
-          section = {
-            title: "Market Narrative",
-            content: input.notes ?? "Narrative section — no additional data required.",
-          };
-        }
+        const input = block.input as { section_type: string };
+        const section =
+          input.section_type === "tvl_overview" ? buildTvlSection(protocols) :
+          input.section_type === "price_performance" ? buildPriceSection(prices) :
+          input.section_type === "dex_volume" ? buildVolumeSection(protocols) :
+          buildNarrativeSection(protocols, prices);
         sections.push(section);
         result = JSON.stringify(section);
       } else if (block.name === "compile_report") {
         const input = block.input as { title: string; subtitle: string; tldr: string; format?: string };
-        const partial: Omit<DeFiReport, "wordCount"> = {
+        const report = finalizeReport({
           id: `report-${Date.now()}`,
           type: reportType,
           title: input.title,
@@ -143,8 +125,7 @@ export async function runAgentLoop(
           sections,
           tldr: input.tldr,
           generatedAt: Date.now(),
-        };
-        const report = finalizeReport(partial);
+        });
         const format = (input.format ?? "markdown") as "markdown" | "json";
         printReport(report, format, config.OUTPUT_DIR);
         result = JSON.stringify({ success: true, wordCount: report.wordCount, sections: sections.length });

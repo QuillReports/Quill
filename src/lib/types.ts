@@ -5,6 +5,7 @@ export interface ReportSection {
   title: string;
   content: string;
   dataPoints?: Record<string, string | number>;
+  sourceNotes?: string[];
 }
 
 export interface DeFiReport {
@@ -26,4 +27,5 @@ export interface ProtocolSnapshot {
   volumeUsd24h: number;
   chain: string;
   category: string;
+  metricSource: "defillama";
 }
