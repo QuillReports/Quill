@@ -1,8 +1,20 @@
 {
   "name": "quill",
   "version": "1.0.0",
-  "description": "AI-powered DeFi report writer. Converts raw protocol data into human-readable weekly digests.",
+  "description": "Protocol intelligence writer that turns market data into memo-style weekly reports with clear provenance.",
   "license": "MIT",
+  "packageManager": "bun@1.2.15",
+  "engines": {
+    "node": ">=20.0.0",
+    "bun": ">=1.2.0"
+  },
+  "keywords": [
+    "solana",
+    "research",
+    "reporting",
+    "defillama",
+    "writing"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/QuillReports/Quill.git"
