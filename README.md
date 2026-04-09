@@ -13,22 +13,15 @@ Quill turns raw market and protocol data into memo-style research that reads lik
 
 ---
 
-Crypto has plenty of dashboards and not enough synthesis. There is always one more table showing TVL, volume, or token performance, but the hard part is turning those numbers into a report that explains what changed, why it matters, and what deserves attention next. Quill is built for that layer.
+Crypto does not have a shortage of dashboards. It has a shortage of market writing that tells the reader what changed, why it matters, and what conclusion is actually worth carrying forward.
 
-It pulls structured protocol data, price data, and market context, then compiles those inputs into readable reports such as weekly ecosystem digests, single-protocol deep dives, and sector snapshots. The output is meant to look like research, not analytics exhaust.
+Quill is built for that missing layer. It pulls protocol and market inputs, organizes them into report sections, and produces memo-style output that feels publishable instead of machine-generated.
 
 `FETCH DATA -> FRAME THE STORY -> WRITE SECTIONS -> COMPILE REPORT -> PUBLISH`
 
 ---
 
-Sample Report - Report Pipeline - At a Glance - Operating Surfaces - How It Works - Example Output - Report Types - Risk Controls - Quick Start
-
-## At a Glance
-
-- `Use case`: writing recurring or on-demand Solana protocol research from live data
-- `Primary input`: protocol TVL, category context, token prices, and writer-side narrative framing
-- `Primary failure mode`: producing generic summaries that restate metrics without explaining them
-- `Best for`: teams that want a repeatable research surface without manually assembling every memo
+Sample Report • Report Pipeline • Why Quill Exists • At a Glance • What Quill Publishes • Editorial Workflow • What Makes A Memo Worth Reading • Example Output • Source Discipline • Risk Controls • Quick Start
 
 ## Sample Report
 
@@ -38,18 +31,65 @@ Sample Report - Report Pipeline - At a Glance - Operating Surfaces - How It Work
 
 ![Quill Pipeline](assets/preview-pipeline.svg)
 
-## Operating Surfaces
-
-- `Data Layer`: pulls protocol and token inputs from tracked external sources
-- `Section Writer`: converts those inputs into structured report sections with supporting datapoints
-- `Formatter`: compiles the final report into markdown or JSON output
-- `Narrative Layer`: keeps the writing factual, readable, and opinionated only where the data supports it
-
 ## Why Quill Exists
 
-The problem with many automated market reports is that they feel automated in the worst way. They list numbers, rename those numbers as "insights," and never build a real argument. That is not enough if the goal is to produce content someone would actually read, share, or use to form an opinion.
+Most automated research products fail in the same way. They confuse summarizing data with writing analysis.
 
-Quill exists to bridge the gap between structured data and readable protocol intelligence. It is not trying to replace human judgment with hype. It is trying to give a research workflow a reliable first draft that already understands the difference between a datapoint and a story.
+The output is usually full of metrics, light on judgment, and impossible to remember five minutes later. It reads like the machine saw numbers and then tried to make those numbers sound important.
+
+Quill is meant to solve that exact problem. It is not trying to replace human conviction with generic AI prose. It is trying to build a strong first draft that already understands how research should flow:
+
+- what changed
+- what stands out
+- what is noise
+- what conclusion deserves attention
+
+That is why the repo is framed as a writer, not a dashboard.
+
+## At a Glance
+
+- `Use case`: writing recurring or on-demand Solana protocol research from live data
+- `Primary input`: protocol TVL, category context, token prices, and writer-side narrative framing
+- `Primary failure mode`: producing generic summaries that restate metrics without explaining them
+- `Best for`: teams that want a repeatable research surface without manually assembling every memo
+
+## What Quill Publishes
+
+Quill is not locked to one report shape. The product is more useful when the operator can decide what kind of writing job needs to be done.
+
+| Report type | Best used for | What the reader should get |
+|-------------|---------------|----------------------------|
+| `weekly_digest` | recurring ecosystem updates | a broad but readable market memo |
+| `protocol_deep_dive` | one protocol under a microscope | a concentrated research note |
+| `sector_overview` | comparing related protocols | a thematic comparison with a clear narrative |
+
+Each report type exists because the writing task is different. A digest should synthesize. A deep dive should explain. A sector note should compare.
+
+## The Editorial Workflow
+
+Quill works best when it is treated like a publishing system rather than a text generator.
+
+### 1. Gather The Facts
+
+Protocol and token inputs are pulled from configured sources so the writer starts from actual market state.
+
+### 2. Choose The Writing Job
+
+The system should know whether it is writing a weekly digest, a protocol memo, or a sector comparison before it begins composing.
+
+### 3. Build The Right Sections
+
+A good report has structure. Quill fills named sections instead of generating one long undirected block.
+
+### 4. Attach The Supporting Points
+
+The narrative becomes more believable when it carries concrete datapoints and source-aware notes.
+
+### 5. Compile Something Reviewable
+
+The final output should feel like a memo a human would actually mark up, share, or publish.
+
+That is the standard Quill should be judged against.
 
 ## How It Works
 
@@ -61,18 +101,32 @@ Quill runs through a research pipeline:
 4. attach source-aware datapoints and supporting notes
 5. compile the sections into a finished markdown or JSON report
 
-The value of the system is not just that it writes. The value is that it writes with enough structure that the final output can be reviewed like a real memo.
+The value is not merely that it writes. The value is that it writes in a form that already respects how good market notes are assembled.
 
-## What Makes A Quill Report Worth Reading
+## What Makes A Memo Worth Reading
 
-A good Quill report does more than summarize.
+A useful Quill report should do more than summarize a table.
 
-- it identifies what changed instead of repeating a static metric snapshot
+- it identifies what changed instead of repeating a static snapshot
 - it frames standout protocols or sectors relative to the broader Solana backdrop
 - it gives the reader one or two conclusions worth carrying forward
-- it makes its data surface visible enough that the argument can be checked
+- it makes the supporting data visible enough that the argument can be checked
 
-That is the line between report generation and content sludge.
+That is the line between research and content sludge.
+
+## How Teams Actually Use Quill
+
+### Publishing Engine
+
+This is the obvious path. A team wants a recurring ecosystem note without manually assembling every section from scratch.
+
+### Internal Memo Builder
+
+A desk can also use Quill to turn fresh metrics into a first-pass memo before a human analyst tightens the conviction and edits the final tone.
+
+### Research Accelerator
+
+Sometimes the value is not publishing at all. Sometimes the value is simply reducing the blank-page problem by starting from a draft that already understands what story the numbers may be telling.
 
 ## Example Output
 
@@ -88,24 +142,26 @@ key takeaways:
 - the strongest reportable narrative this week was rotation, not broad expansion
 ```
 
-## Report Types
+## Source Discipline
 
-| Type | Best used for | Output style |
-|------|---------------|--------------|
-| `weekly_digest` | recurring ecosystem updates | broad market memo |
-| `protocol_deep_dive` | single protocol analysis | focused research note |
-| `sector_overview` | comparing related protocols | thematic comparison |
+Quill gets more credible when the writing surface makes the evidence visible.
 
-Each report type has a different writing job. A weekly digest should synthesize. A deep dive should explain. A sector overview should compare.
+That is why the repo is built around provenance-aware sections:
 
-## How Teams Usually Use Quill
+- data-backed notes belong next to the claims they support
+- report types stay bounded so the writer does not drift into filler
+- the output can be reviewed in markdown or machine-consumed in JSON
 
-Quill works well in two modes:
+This matters for launch too. A repo that says "AI writes reports" is weak. A repo that says "AI writes reviewable research with visible support" is much easier to trust.
 
-1. as a recurring publishing engine for ecosystem updates
-2. as a rapid drafting tool for internal or public protocol memos
+## What Quill Refuses To Do
 
-In both cases, the point is the same: move faster from raw metrics to something publishable without falling into generic AI prose.
+- pretend a metric list is the same as analysis
+- write undirected prose blobs with no section job
+- hide the data surface behind vague market language
+- treat every report as if the same writing structure fits every job
+
+Those limits are a strength. They make the product easier to understand and easier to ship.
 
 ## Risk Controls
 
@@ -138,6 +194,13 @@ LOG_LEVEL=info
 ```
 
 Set `REPORT_TYPE=protocol_deep_dive` or `REPORT_TYPE=sector_overview` when you want a narrower output than the weekly digest flow.
+
+## Support Docs
+
+- [Runbook](docs/runbook.md)
+- [Changelog](CHANGELOG.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security](SECURITY.md)
 
 ## License
 
