@@ -12,20 +12,42 @@ async function main(): Promise<void> {
     | "protocol_deep_dive"
     | "sector_overview";
 
-  logger.info(`Quill starting — report type: ${reportType}`);
+  logger.info(`Quill starting - report type: ${reportType}`);
 
   async function generate(): Promise<void> {
+    const startedAt = Date.now();
+
     try {
       await runAgentLoop(config, reportType);
     } catch (err) {
       logger.error("Report generation error:", err);
+    } finally {
+      const durationMs = Date.now() - startedAt;
+      logger.info("Report generation complete", { durationMs, reportType });
+
+      if (config.REPORT_INTERVAL_MS > 0 && durationMs > config.REPORT_INTERVAL_MS) {
+        logger.warn("Report generation exceeded configured interval", {
+          durationMs,
+          intervalMs: config.REPORT_INTERVAL_MS,
+        });
+      }
     }
   }
 
   await generate();
 
   if (config.REPORT_INTERVAL_MS > 0) {
-    setInterval(generate, config.REPORT_INTERVAL_MS);
+    const runLoop = async (): Promise<void> => {
+      await generate();
+      setTimeout(() => {
+        void runLoop();
+      }, config.REPORT_INTERVAL_MS);
+    };
+
+    setTimeout(() => {
+      void runLoop();
+    }, config.REPORT_INTERVAL_MS);
+
     const days = config.REPORT_INTERVAL_MS / 86_400_000;
     logger.info(`Next report in ${days} day${days !== 1 ? "s" : ""}...`);
   }
