@@ -1,10 +1,12 @@
 import type { DeFiReport, ReportSection } from "../lib/types.js";
 
 export function formatUsd(n: number): string {
-  if (n >= 1_000_000_000) return `$${(n / 1_000_000_000).toFixed(2)}B`;
-  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(2)}M`;
-  if (n >= 1_000) return `$${(n / 1_000).toFixed(1)}K`;
-  return `$${n.toFixed(2)}`;
+  const sign = n < 0 ? "-" : "";
+  const value = Math.abs(n);
+  if (value >= 1_000_000_000) return `${sign}$${(value / 1_000_000_000).toFixed(2)}B`;
+  if (value >= 1_000_000) return `${sign}$${(value / 1_000_000).toFixed(2)}M`;
+  if (value >= 1_000) return `${sign}$${(value / 1_000).toFixed(1)}K`;
+  return `${sign}$${value.toFixed(2)}`;
 }
 
 export function formatPct(n: number): string {
@@ -13,7 +15,8 @@ export function formatPct(n: number): string {
 }
 
 function countWords(text: string): number {
-  return text.trim().split(/\s+/).length;
+  const trimmed = text.trim();
+  return trimmed ? trimmed.split(/\s+/).length : 0;
 }
 
 export function renderMarkdown(report: DeFiReport): string {

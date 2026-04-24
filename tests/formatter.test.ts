@@ -15,6 +15,10 @@ describe("formatUsd", () => {
     expect(formatUsd(12_500)).toBe("$12.5K");
   });
 
+  it("formats negative values with the sign before currency", () => {
+    expect(formatUsd(-12_500)).toBe("-$12.5K");
+  });
+
   it("formats small amounts", () => {
     expect(formatUsd(99.5)).toBe("$99.50");
   });
