@@ -21,15 +21,7 @@ Quill is built for that missing layer. It pulls protocol and market inputs, orga
 
 ---
 
-Sample Report • Report Pipeline • Why Quill Exists • At a Glance • What Quill Publishes • Editorial Workflow • What Makes A Memo Worth Reading • Example Output • Source Discipline • Risk Controls • Quick Start
-
-## Sample Report
-
-![Quill Report](assets/preview-report.svg)
-
-## Report Pipeline
-
-![Quill Pipeline](assets/preview-pipeline.svg)
+Why Quill Exists • At a Glance • What Quill Publishes • Editorial Workflow • What Makes A Memo Worth Reading • Example Output • Source Discipline • Risk Controls • Quick Start
 
 ## Why Quill Exists
 
