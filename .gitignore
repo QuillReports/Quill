@@ -6,3 +6,4 @@ logs/
 coverage/
 reports/
 .DS_Store
+site/
