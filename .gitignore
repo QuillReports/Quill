@@ -3,9 +3,11 @@ dist/
 .env
 *.db
 logs/
+*.log
 coverage/
 reports/
 .DS_Store
+Thumbs.db
 site/
 # Local env overrides
 .env.local
