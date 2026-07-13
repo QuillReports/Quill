@@ -2,7 +2,7 @@
 
 # Quill
 
-**Protocol intelligence writer for the Solana ecosystem.**
+**Protocol intelligence writer for the Robinhood ecosystem.**
 Quill turns raw market and protocol data into memo-style research that reads like an actual analyst wrote it, not like a dashboard exported itself.
 
 [![Build](https://img.shields.io/github/actions/workflow/status/QuillReports/Quill/ci.yml?branch=master&style=flat-square&label=Build)](https://github.com/QuillReports/Quill/actions)
@@ -40,7 +40,7 @@ That is why the repo is framed as a writer, not a dashboard.
 
 ## At a Glance
 
-- `Use case`: writing recurring or on-demand Solana protocol research from live data
+- `Use case`: writing recurring or on-demand Robinhood protocol research from live data
 - `Primary input`: protocol TVL, category context, token prices, and writer-side narrative framing
 - `Primary failure mode`: producing generic summaries that restate metrics without explaining them
 - `Best for`: teams that want a repeatable research surface without manually assembling every memo
@@ -100,7 +100,7 @@ The value is not merely that it writes. The value is that it writes in a form th
 A useful Quill report should do more than summarize a table.
 
 - it identifies what changed instead of repeating a static snapshot
-- it frames standout protocols or sectors relative to the broader Solana backdrop
+- it frames standout protocols or sectors relative to the broader Robinhood backdrop
 - it gives the reader one or two conclusions worth carrying forward
 - it makes the supporting data visible enough that the argument can be checked
 
@@ -125,7 +125,7 @@ Sometimes the value is not publishing at all. Sometimes the value is simply redu
 ```text
 QUILL // WEEKLY DIGEST
 
-title: Solana DeFi Weekly Digest
+title: Robinhood DeFi Weekly Digest
 focus: DEX activity expanded while lending TVL stayed more selective
 
 key takeaways:
