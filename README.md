@@ -5,7 +5,7 @@
 **Market intelligence writer for Robinhood crypto.**
 Quill turns raw asset and market data into memo-style research that reads like an actual analyst wrote it, not like a dashboard exported itself.
 
-[Website](https://quill-launch.vercel.app/)
+[Website](https://quillalpha.com/)
 
 [![Build](https://img.shields.io/github/actions/workflow/status/QuillReports/Quill/ci.yml?branch=master&style=flat-square&label=Build)](https://github.com/QuillReports/Quill/actions)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)

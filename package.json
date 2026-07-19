@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/QuillReports/Quill/issues"
   },
-  "homepage": "https://quill-launch.vercel.app/",
+  "homepage": "https://quillalpha.com/",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
