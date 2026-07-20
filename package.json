@@ -1,7 +1,7 @@
 {
   "name": "quill",
   "version": "1.0.0",
-  "description": "Robinhood market intelligence writer that turns live crypto data into clear memo-style reports.",
+  "description": "Protocol intelligence writer that turns market data into memo-style weekly reports with clear provenance.",
   "license": "MIT",
   "packageManager": "bun@1.2.15",
   "engines": {
@@ -9,11 +9,10 @@
     "bun": ">=1.2.0"
   },
   "keywords": [
-    "robinhood",
+    "solana",
     "research",
     "reporting",
-    "crypto",
-    "market-research",
+    "defillama",
     "writing"
   ],
   "repository": {
@@ -23,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/QuillReports/Quill/issues"
   },
-  "homepage": "https://quillalpha.com/",
+  "homepage": "https://github.com/QuillReports/Quill#readme",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
