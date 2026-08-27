@@ -9,6 +9,10 @@ Quill turns raw market and protocol data into memo-style research that reads lik
 ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
 [![Built with Claude Agent SDK](https://img.shields.io/badge/Built%20with-Claude%20Agent%20SDK-2dd4bf?style=flat-square)](https://docs.anthropic.com/en/docs/agents-and-tools/claude-agent-sdk)
 
+[Website](https://quillalpha.com/)
+
+Solana token launching through [Pump.fun](https://pump.fun/).
+
 </div>
 
 ---

@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/QuillReports/Quill/issues"
   },
-  "homepage": "https://github.com/QuillReports/Quill#readme",
+  "homepage": "https://quillalpha.com/",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
