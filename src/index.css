@@ -13,7 +13,6 @@
 
 html {
   background: var(--quill-canvas);
-  scroll-behavior: smooth;
 }
 
 body {
@@ -56,15 +55,4 @@ body {
 .quill-shell ::selection {
   color: var(--quill-canvas);
   background: var(--quill-ivory);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .quill-shell,
-  .quill-shell * {
-    transition-duration: 0.01ms !important;
-  }
 }
