@@ -29,7 +29,6 @@ body {
 
 .quill-shell {
   min-height: 100vh;
-  overflow-x: clip;
   background-color: var(--quill-canvas) !important;
   background-image:
     radial-gradient(circle at 50% -12%, rgb(199 122 61 / 14%), transparent 32rem),
@@ -40,10 +39,6 @@ body {
 .quill-brand-mark {
   border: 1px solid #4a4239;
   box-shadow: 0 0 0 1px rgb(0 0 0 / 75%), 0 0 18px rgb(199 122 61 / 20%);
-}
-
-.quill-shell a {
-  transition-duration: 180ms;
 }
 
 .quill-shell a:focus-visible {
