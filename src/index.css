@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --quill-canvas: #070605;
+  --quill-panel: #100e0c;
+  --quill-border: #342f2a;
+  --quill-copper: #c77a3d;
+  --quill-ivory: #e2d2ad;
+}
+
+html {
+  background: var(--quill-canvas);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--quill-canvas);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.quill-shell {
+  min-height: 100vh;
+  overflow-x: clip;
+  background-color: var(--quill-canvas) !important;
+  background-image:
+    radial-gradient(circle at 50% -12%, rgb(199 122 61 / 14%), transparent 32rem),
+    linear-gradient(90deg, transparent 49.9%, rgb(226 210 173 / 2.5%) 50%, transparent 50.1%);
+  background-attachment: fixed;
+}
+
+.quill-brand-mark {
+  border: 1px solid #4a4239;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 75%), 0 0 18px rgb(199 122 61 / 20%);
+}
+
+.quill-shell a {
+  transition-duration: 180ms;
+}
+
+.quill-shell a:focus-visible {
+  outline: 2px solid var(--quill-ivory);
+  outline-offset: 3px;
+}
+
+.quill-shell::selection,
+.quill-shell ::selection {
+  color: var(--quill-canvas);
+  background: var(--quill-ivory);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .quill-shell,
+  .quill-shell * {
+    transition-duration: 0.01ms !important;
+  }
+}
