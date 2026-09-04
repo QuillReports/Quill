@@ -2,16 +2,16 @@
 
 # Quill
 
-**Protocol intelligence writer for the Solana ecosystem.**
-Quill turns raw market and protocol data into memo-style research that reads like an actual analyst wrote it, not like a dashboard exported itself.
+<img src="assets/quill-avatar.png" alt="Quill avatar" width="128" />
+
+**Market intelligence writer for Robinhood crypto.**
+Quill turns raw asset and market data into memo-style research that reads like an actual analyst wrote it, not like a dashboard exported itself.
+
+[Website](https://quillalpha.com/) · [Launch venue](https://pons.family/)
 
 [![Build](https://img.shields.io/github/actions/workflow/status/QuillReports/Quill/ci.yml?branch=master&style=flat-square&label=Build)](https://github.com/QuillReports/Quill/actions)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
 [![Built with Claude Agent SDK](https://img.shields.io/badge/Built%20with-Claude%20Agent%20SDK-2dd4bf?style=flat-square)](https://docs.anthropic.com/en/docs/agents-and-tools/claude-agent-sdk)
-
-[Website](https://quillalpha.com/)
-
-Solana token launching through [Pump.fun](https://pump.fun/).
 
 </div>
 
@@ -19,7 +19,7 @@ Solana token launching through [Pump.fun](https://pump.fun/).
 
 Crypto does not have a shortage of dashboards. It has a shortage of market writing that tells the reader what changed, why it matters, and what conclusion is actually worth carrying forward.
 
-Quill is built for that missing layer. It pulls protocol and market inputs, organizes them into report sections, and produces memo-style output that feels publishable instead of machine-generated.
+Quill is built for that missing layer. It pulls asset and market inputs, organizes them into report sections, and produces memo-style output that feels publishable instead of machine-generated.
 
 `FETCH DATA -> FRAME THE STORY -> WRITE SECTIONS -> COMPILE REPORT -> PUBLISH`
 
@@ -44,8 +44,8 @@ That is why the repo is framed as a writer, not a dashboard.
 
 ## At a Glance
 
-- `Use case`: writing recurring or on-demand Solana protocol research from live data
-- `Primary input`: protocol TVL, category context, token prices, and writer-side narrative framing
+- `Use case`: writing recurring or on-demand Robinhood crypto research from live data
+- `Primary input`: asset prices, volume, market cap, category context, and writer-side narrative framing
 - `Primary failure mode`: producing generic summaries that restate metrics without explaining them
 - `Best for`: teams that want a repeatable research surface without manually assembling every memo
 
@@ -56,8 +56,8 @@ Quill is not locked to one report shape. The product is more useful when the ope
 | Report type | Best used for | What the reader should get |
 |-------------|---------------|----------------------------|
 | `weekly_digest` | recurring ecosystem updates | a broad but readable market memo |
-| `protocol_deep_dive` | one protocol under a microscope | a concentrated research note |
-| `sector_overview` | comparing related protocols | a thematic comparison with a clear narrative |
+| `protocol_deep_dive` | one asset under a microscope | a concentrated research note |
+| `sector_overview` | comparing related crypto sectors | a thematic comparison with a clear narrative |
 
 Each report type exists because the writing task is different. A digest should synthesize. A deep dive should explain. A sector note should compare.
 
@@ -67,11 +67,11 @@ Quill works best when it is treated like a publishing system rather than a text 
 
 ### 1. Gather The Facts
 
-Protocol and token inputs are pulled from configured sources so the writer starts from actual market state.
+Asset and market inputs are pulled from configured sources so the writer starts from actual market state.
 
 ### 2. Choose The Writing Job
 
-The system should know whether it is writing a weekly digest, a protocol memo, or a sector comparison before it begins composing.
+The system should know whether it is writing a weekly digest, an asset memo, or a sector comparison before it begins composing.
 
 ### 3. Build The Right Sections
 
@@ -91,7 +91,7 @@ That is the standard Quill should be judged against.
 
 Quill runs through a research pipeline:
 
-1. fetch protocol snapshots and market data from the configured sources
+1. fetch asset snapshots and market data from the configured sources
 2. decide what kind of report is being written
 3. build the right sections for that report type
 4. attach source-aware datapoints and supporting notes
@@ -104,7 +104,7 @@ The value is not merely that it writes. The value is that it writes in a form th
 A useful Quill report should do more than summarize a table.
 
 - it identifies what changed instead of repeating a static snapshot
-- it frames standout protocols or sectors relative to the broader Solana backdrop
+- it frames standout assets or sectors relative to the broader Robinhood backdrop
 - it gives the reader one or two conclusions worth carrying forward
 - it makes the supporting data visible enough that the argument can be checked
 
@@ -129,13 +129,14 @@ Sometimes the value is not publishing at all. Sometimes the value is simply redu
 ```text
 QUILL // WEEKLY DIGEST
 
-title: Solana DeFi Weekly Digest
-focus: DEX activity expanded while lending TVL stayed more selective
+Snapshot: September 4, 2026 · 12:27 UTC
+title: Robinhood Crypto Market Brief
+focus: LINK led the tracked set at +6.56%, followed by BONK at +6.29% and XRP at +5.84%
 
 key takeaways:
-- TVL growth was uneven and concentrated in a small number of venues
-- token performance outpaced underlying protocol traction in several cases
-- the strongest reportable narrative this week was rotation, not broad expansion
+- LINK traded at $12.02 and led the tracked basket
+- ETH reached $2,521.04 while BTC traded at $81,172
+- the broad advance mattered more than any single isolated print
 ```
 
 ## Source Discipline
